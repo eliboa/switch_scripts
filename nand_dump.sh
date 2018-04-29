@@ -29,7 +29,7 @@ echo '=> TSEC FW EXTRACTION (FOR BIS KEY DUMPER)'
 OFFSETS=`cat nand_boot0_dump.bin | hexdump -C | grep '4d 00 42 cf'`
 OFFSET1=`echo $OFFSETS | cut -c1-8`
 OFFSET1=`echo '0x'$OFFSET1`
-echo 'Extracting 3480 bytes from nand_boot0_dump.bin at offset : ' $OFFSET1
+echo 'Extracting 3480 bytes from BOOT 0 PARTITION at offset : ' $OFFSET1
 dcfldd skip=$(($OFFSET1)) count=3840 if=/dev/mmcblk1boot0 of=tsecfw.bin bs=1
 cat tsecfw.bin | hexdump -v -e '16/1 "0x%x," "\n"' > tsecfw.inl
 rm tsecfw.bin
